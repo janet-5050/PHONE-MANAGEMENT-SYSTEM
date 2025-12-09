@@ -124,36 +124,37 @@ def shop(request):
         'q': q,
         'brand_selected': brand
     })
-# Add phone to cart
 def add_to_cart(request, phone_id):
     cart = request.session.get('cart', {})
-    cart[phone_id] = cart.get(phone_id, 0) + 1  # increase quantity by 1
+    str_id = str(phone_id)  # session keys must be strings
+    cart[str_id] = cart.get(str_id, 0) + 1
     request.session['cart'] = cart
-    return redirect('inventory:shop')
+    request.session.modified = True
+    return redirect('inventory:cart')  # redirect to cart page
 
-# Remove phone from cart
 def remove_from_cart(request, phone_id):
     cart = request.session.get('cart', {})
-    if phone_id in cart:
-        del cart[phone_id]
+    str_id = str(phone_id)
+    if str_id in cart:
+        del cart[str_id]
     request.session['cart'] = cart
+    request.session.modified = True
     return redirect('inventory:cart')
 
-# View cart
 def cart(request):
-    cart = request.session.get('cart', {})
-    phone_ids = cart.keys()
+    cart_session = request.session.get('cart', {})
+    phone_ids = [int(pid) for pid in cart_session.keys()]
     phones = Phone.objects.filter(id__in=phone_ids)
+
     cart_items = []
     total = 0
     for phone in phones:
-        qty = cart[str(phone.id)]
+        qty = cart_session[str(phone.id)]
         subtotal = phone.price * qty
         cart_items.append({'phone': phone, 'qty': qty, 'subtotal': subtotal})
         total += subtotal
-    return render(request, 'inventory/cart.html', {'cart_items': cart_items, 'total': total})
-def view_cart(request):
-    # This is where you'd normally pass cart items from session or database
-    cart = request.session.get('cart', {})
-    return render(request, 'inventory/cart.html', {'cart': cart})
 
+    return render(request, 'inventory/cart.html', {
+        'cart_items': cart_items,
+        'total': total
+    })

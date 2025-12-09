@@ -28,6 +28,7 @@ a {
     display: inline-block;
     margin: 0;
     font-size: 1.4rem;
+
 }
 
 .site-header nav {
@@ -198,11 +199,26 @@ a {
 }
 
 /* FOOTER */
-footer {
-    margin-top: 2rem;
-    padding: 1rem;
+/* Footer styling */
+.site-footer {
+    background-color: #0b74da;  /* matches your header/nav */
+    color: #fff;
+    padding: 1rem 0;
     text-align: center;
-    color: #777;
+    font-size: 0.9rem;
+    border-top: 3px solid #074a9c; /* subtle accent line */
+}
+
+.site-footer a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.site-footer a:hover {
+    color: #ffd700; /* optional highlight on hover */
+}
+
+
 }
 
 /* RESPONSIVE FIX */
@@ -213,3 +229,129 @@ footer {
         margin-top: .5rem;
     }
 }
+/* General button styling */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Primary button (e.g., Search) */
+.btn-primary {
+    background-color: #0b74da;
+    color: #fff;
+}
+.btn-primary:hover {
+    background-color: #074a9c;
+}
+
+/* Success button (e.g., Add to Cart, Add Phone) */
+.btn-success {
+    background-color: #28a745;
+    color: #fff;
+}
+.btn-success:hover {
+    background-color: #1e7e34;
+}
+
+/* Danger button (e.g., Delete) */
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+.btn-danger:hover {
+    background-color: #a71d2a;
+}
+
+/* Info button (optional, e.g., Edit) */
+.btn-info {
+    background-color: #17a2b8;
+    color: #fff;
+}
+.btn-info:hover {
+    background-color: #117a8b;
+}
+/* Form container */
+form {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+/* Labels */
+form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Text inputs, selects, textareas */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="number"],
+form select,
+form textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Focus effect for inputs */
+form input:focus,
+form select:focus,
+form textarea:focus {
+    outline: none;
+    border-color: #0b74da;
+    box-shadow: 0 0 0 2px rgba(11,116,218,0.2);
+}
+
+/* Submit buttons inside forms */
+form button[type="submit"],
+form .btn {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    background-color: #0b74da;
+    transition: background 0.3s ease;
+}
+
+form button[type="submit"]:hover,
+form .btn:hover {
+    background-color: #074a9c;
+}
+
+/* Optional: smaller spacing for inline forms */
+form.row.g-2 .col-md-2 button {
+    margin-top: 1.5rem;
+}
+/* Logout button */
+.logout-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0;
+}
+
+.logout-btn:hover {
+    text-decoration: underline;
+}
+
