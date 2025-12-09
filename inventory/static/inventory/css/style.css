@@ -1,0 +1,215 @@
+/* GLOBAL RESET */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    color: #222;
+    background: #f7f8fa;
+    padding: 1rem;
+}
+
+/* LINKS */
+a {
+    color: #0b74da;
+    text-decoration: none;
+}
+
+/* HEADER */
+.site-header {
+    background: #0b74da;
+    color: #fff;
+    padding: 1rem 0;
+}
+
+.site-header h1 {
+    display: inline-block;
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.site-header nav {
+    float: right;
+}
+
+.site-header nav a {
+    color: #fff;
+    margin-left: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.site-header nav a:hover {
+    text-decoration: underline;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+/* GRID (SHOP + INVENTORY LIST) */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.2rem;
+}
+
+/* CARD */
+.card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #e3e3e3;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    transition: transform .2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+.card-title {
+    font-size: 1.05rem;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+.card-text {
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+/* BUTTONS */
+.btn {
+    display: inline-block;
+    padding: .5rem .9rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* COLORS */
+.btn-primary {
+    background: #0b74da;
+}
+.btn-primary:hover {
+    background: #095cb0;
+}
+
+.btn-success {
+    background: #28a745;
+}
+.btn-success:hover {
+    background: #1f8638;
+}
+
+.btn-danger {
+    background: #dc3545;
+}
+.btn-danger:hover {
+    background: #b02a37;
+}
+
+.btn-warning {
+    background: #ffc107;
+    color: #222;
+}
+.btn-warning:hover {
+    background: #e0aa06;
+}
+
+/* FULL WIDTH BUTTON */
+.btn-block {
+    width: 100%;
+}
+
+/* EDIT / DELETE BUTTONS */
+.actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 10px;
+}
+
+.actions .btn {
+    flex: 1;
+}
+
+/* SELL PAGE STYLES */
+.sell-container {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.sell-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.sell-table th,
+.sell-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.sell-table th {
+    background: #0b74da;
+    color: #fff;
+}
+
+.sell-table input[type="number"] {
+    width: 80px;
+    padding: 5px;
+}
+
+.sell-form label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+.sell-form input,
+.sell-form select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+}
+
+/* FOOTER */
+footer {
+    margin-top: 2rem;
+    padding: 1rem;
+    text-align: center;
+    color: #777;
+}
+
+/* RESPONSIVE FIX */
+@media(max-width: 600px) {
+    .site-header nav {
+        float: none;
+        text-align: center;
+        margin-top: .5rem;
+    }
+}

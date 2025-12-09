@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="{% static 'inventory/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <title>{% block title %}Phone Management{% endblock %}</title>
+</head>
+<body>
+<header class="site-header">
+    <div class="container">
+        <h1><a href="{% url 'inventory:phone_list' %}">Phone Management</a></h1>
+        <nav>
+    <a href="{% url 'inventory:phone_list' %}">Inventory</a>
+    <a href="{% url 'inventory:dashboard' %}">Dashboard</a>
+    <a href="{% url 'inventory:sell_phone' %}">Sell</a>
+    <a href="{% url 'inventory:admin_dashboard' %}">Admin</a>
+    <a href="{% url 'inventory:shop' %}">Shop</a>
+    <a href="{% url 'inventory:view_cart' %}">Cart</a>
+
+
+    {% if user.is_authenticated %}
+         <a href="{% url 'inventory:view_cart' %}" class="btn btn-outline-light position-relative me-2">
+        🛒
+        {% if cart_items_count %}
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{ cart_items_count }}
+        </span>
+        {% endif %}
+    </a>
+        <form action="{% url 'inventory:logout' %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" style="background:none;border:none;color:white;cursor:pointer;">
+                Logout
+            </button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'inventory:register' %}">Register</a>
+    {% endif %}
+</nav>
+
+    </div>
+</header>
+
+<main class="container">
+    {% if messages %}
+        <ul class="messages">
+            {% for m in messages %}
+                <li class="msg {{ m.tags }}">{{ m }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+    <div class="container">
+    <h2>About Us</h2>
+
+    <p>
+        Welcome to our Phone Management System — a powerful tool designed to help businesses manage their phone inventory, sales, and product details efficiently.
+    </p>
+    <p>
+        Based in <strong>Thika, Kenya</strong>, we aim to provide mobile phone retailers with a simplified, accurate, and reliable way to keep track of stock, sales, and product performance.
+    </p>
+    <p>
+        Whether you're running a shop or a chain of stores, our system helps you stay organized, save time, and focus on growth.
+    </p>
+
+    <hr>
+
+    <h3>Contact Us</h3>
+    <p><strong>Email:</strong> info@phonemgt.co.ke</p>
+    <p><strong>Phone:</strong> ‪+254 712 345678‬</p>
+    <p><strong>Location:</strong> Thika Town, Kenya</p>
+
+    <div style="margin-top: 1rem;">
+        <iframe
+            src="https://www.google.com/maps?q=thika,kenya&output=embed"
+            width="100%"
+            height="300"
+            style="border:0;"
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <small>&copy; {% now "Y" %} Phone Management</small>
+    </div>
+</footer>
+</body>
+</html>

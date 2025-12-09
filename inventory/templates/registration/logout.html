@@ -1,0 +1,12 @@
+{% extends 'inventory/base.html' %}
+
+{% block title %}Logged Out{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h2>You have successfully logged out.</h2>
+    <p>Thank you for visiting. Come back soon!</p>
+    <a href="{% url 'logout' %}">Logout</a>
+    <a href="{% url 'inventory:phone_list' %}" class="btn btn-secondary mt-3">Go Home</a>
+</div>
+{% endblock %}

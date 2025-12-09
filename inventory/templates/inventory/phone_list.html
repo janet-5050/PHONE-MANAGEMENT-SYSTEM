@@ -1,0 +1,49 @@
+{% extends 'inventory/base.html' %}
+{% block content %}
+<h1>PHONE MANAGEMENT SYSTEM</h1>
+<p>Explore our wide range of smartphones from budget friendly to flagship devices</p>
+<form method="get" class="p-4 mb-4 bg-light rounded shadow-sm">
+    <div class="row g-3 align-items-end">
+
+        <!-- Search input -->
+        <div class="col-md-6">
+            <label for="search" class="form-label fw-bold">Search</label>
+            <input type="text" id="search" name="q" value="{{ q|default:'' }}"
+                   class="form-control form-control-lg" placeholder="Search by name or SKU">
+        </div>
+
+        <!-- Brand dropdown -->
+        <div class="col-md-4">
+            <label for="brand" class="form-label fw-bold">Brand</label>
+            <select id="brand" name="brand" class="form-select form-select-lg">
+                <option value="">All brands</option>
+                {% for b in brands %}
+                    <option value="{{ b.name }}" {% if brand_selected == b.name %}selected{% endif %}>
+                        {{ b.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Search button -->
+        <div class="col-md-2 d-grid">
+            <button type="submit" class="btn btn-primary btn-lg">Search</button>
+        </div>
+
+        <!-- Add Phone button (only for logged-in users) -->
+        {% if user.is_authenticated %}
+        <div class="col-12 mt-3 text-end">
+            <a href="{% url 'inventory:phone_create' %}" class="btn btn-success btn-lg">
+                <i class="bi bi-plus-circle"></i> Add Phone
+            </a>
+        </div>
+        {% endif %}
+
+    </div>
+</form>
+
+<div class="grid">{% for phone in phones %}<div class="card"><a href="{{ phone.get_absolute_url }}">{% if phone.image %}<img src="{{ phone.image.url }}">{% else %}<div class="placeholder">No Image</div>{% endif %}</a>
+<h3>{{ phone.brand.name }} {{ phone.name }}</h3><p>SKU: {{ phone.sku }}</p><p>Price: Ksh {{ phone.price }}</p><p>Stock: {{ phone.stock }}</p>
+{% if user.is_authenticated %}<p><a href="{% url 'inventory:phone_update' phone.pk %}">Edit</a> | <a href="{% url 'inventory:phone_delete' phone.pk %}">Delete</a></p>{% endif %}</div>{% empty %}<p>No phones.</p>{% endfor %}</div>
+<div class="pagination">{% if phones.has_previous %}<a href="?page={{ phones.previous_page_number }}">&laquo; Prev</a>{% endif %}<span>Page {{ phones.number }} of {{ phones.paginator.num_pages }}</span>{% if phones.has_next %}<a href="?page={{ phones.next_page_number }}">Next &raquo;</a>{% endif %}</div>
+{% endblock %}

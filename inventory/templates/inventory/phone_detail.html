@@ -1,0 +1,3 @@
+{% extends 'inventory/base.html' %}{% block content %}<div class="detail"><div class="img">{% if phone.image %}<img src="{{ phone.image.url }}">{% endif %}</div><div class="info"><h2>{{ phone.brand.name }} {{ phone.name }}</h2>
+<p><strong>SKU:</strong> {{ phone.sku }}</p><p><strong>Price:</strong> Ksh {{ phone.price }}</p><p><strong>Storage:</strong> {{ phone.storage }} | <strong>RAM:</strong> {{ phone.ram }}</p>
+<p><strong>Stock:</strong> {{ phone.stock }}</p><p>{{ phone.description }}</p>{% if user.is_authenticated %}<p><a href="{% url 'inventory:phone_update' phone.pk %}">Edit</a> | <a href="{% url 'inventory:phone_delete' phone.pk %}">Delete</a></p>{% endif %}</div></div>{% endblock %}

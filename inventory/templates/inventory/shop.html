@@ -1,0 +1,78 @@
+{% extends 'inventory/base.html' %}
+
+{% block title %}Shop - Phone Management{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <!-- Search & Filter Form -->
+    <form method="get" class="row g-2 mb-4 align-items-end">
+        <div class="col-md-6">
+            <label for="search" class="form-label">Search</label>
+            <input type="text" id="search" name="q" value="{{ q|default:'' }}" class="form-control" placeholder="Search by name or SKU">
+        </div>
+
+        <div class="col-md-4">
+            <label for="brand" class="form-label">Brand</label>
+            <select id="brand" name="brand" class="form-select">
+                <option value="">All brands</option>
+                {% for b in brands %}
+                <option value="{{ b.name }}" {% if brand_selected == b.name %}selected{% endif %}>
+                    {{ b.name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Search</button>
+        </div>
+    </form>
+
+    <!-- Phones Grid -->
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        {% for phone in phones %}
+        <div class="col">
+            <div class="card h-100 text-center">
+                {% if phone.image %}
+                <img src="{{ phone.image.url }}" class="card-img-top" alt="{{ phone.name }}">
+                {% else %}
+                <div class="placeholder bg-light d-flex align-items-center justify-content-center" style="height:200px;">
+                    No Image
+                </div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ phone.brand.name }} {{ phone.name }}</h5>
+                    <p class="card-text">Ksh {{ phone.price }}</p>
+                    <a href="{% url 'inventory:add_to_cart' phone.id %}" class="btn btn-success w-100">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No phones available.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            {% if phones.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ phones.previous_page_number }}{% if q %}&q={{ q }}{% endif %}{% if brand_selected %}&brand={{ brand_selected }}{% endif %}">&laquo; Prev</a>
+            </li>
+            {% endif %}
+
+            <li class="page-item disabled">
+                <span class="page-link">Page {{ phones.number }} of {{ phones.paginator.num_pages }}</span>
+            </li>
+
+            {% if phones.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ phones.next_page_number }}{% if q %}&q={{ q }}{% endif %}{% if brand_selected %}&brand={{ brand_selected }}{% endif %}">Next &raquo;</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+</div>
+{% endblock %}

@@ -1,0 +1,2 @@
+{% extends 'inventory/base.html' %}{% block content %}<h2>Confirm delete</h2><p>Are you sure you want to delete <strong>{{ phone }}</strong>?</p><form method="post">{% csrf_token %}<button type="submit" class="danger">Yes, delete</button><a href="{{ phone.get_absolute_url }}">Cancel</a></form>{% endblock %}
+
